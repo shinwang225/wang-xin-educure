@@ -8,15 +8,14 @@ public class Main8 {
         int attackValue = Integer.parseInt(attack);
 
         System.out.println("防御力を入力してください：");
-        String denfense = scanner.nextLine(); 
-        int denfenseValue = Integer.parseInt(denfense);
+        String defense = scanner.nextLine(); 
+        int defenseValue = Integer.parseInt(defense);
 
-        int normalDamage = attackValue - denfenseValue;
-        double criticalDamage1 = 1.5 * normalDamage;
-        int criticalDamage2 = (int)criticalDamage1;
+        int normalDamage = attackValue - defenseValue;
+        int criticalDamage = (int)(normalDamage*1.5);
         
         System.out.println("通常ダメージ：" + normalDamage);
-        System.out.println("クリティカルダメージ：" + criticalDamage2);
+        System.out.println("クリティカルダメージ：" + criticalDamage);
 
         scanner.close();
     }
