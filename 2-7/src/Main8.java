@@ -4,14 +4,12 @@ public class Main8 {
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("攻撃力を入力してください：");
-        String attack = scanner.nextLine(); 
-        int attackValue = Integer.parseInt(attack);
+        int attack = Integer.parseInt(scanner.nextLine());
 
         System.out.println("防御力を入力してください：");
-        String defense = scanner.nextLine(); 
-        int defenseValue = Integer.parseInt(defense);
+        int defense = Integer.parseInt(scanner.nextLine());
 
-        int normalDamage = attackValue - defenseValue;
+        int normalDamage = attack - defense;
         int criticalDamage = (int)(normalDamage*1.5);
         
         System.out.println("通常ダメージ：" + normalDamage);
