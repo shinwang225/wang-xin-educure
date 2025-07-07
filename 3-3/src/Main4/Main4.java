@@ -4,7 +4,7 @@ public class Main4 {
         Weapon weapon = new Weapon();
         weapon.setWeapon("伝説の剣", 100);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 10; i++) {
             weapon.use();
         }
         weapon.repair();
