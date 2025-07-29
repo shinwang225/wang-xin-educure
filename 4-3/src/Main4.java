@@ -15,13 +15,13 @@ public class Main4 {
     }
     
     //追加：開始時間をフォーマットする
-    public String getFormattedStartTime() {
+    public String getStartTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月d日 HH:mm z");
         return startTime.format(formatter);   
     }
 
     //追加：終了時間をフォーマットする
-    public String getFormattedEndTime() {
+    public String getEndTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月d日 HH:mm z");
         return endTime.format(formatter);
     }
@@ -52,8 +52,8 @@ public class Main4 {
         Main4 event1 = new Main4("サマーフェスティバル", start, end);
 
         System.out.println("イベント: " + event1.eventName);
-        System.out.println("開始: " + event1.getFormattedStartTime());
-        System.out.println("終了: " + event1.getFormattedEndTime());
+        System.out.println("開始: " + event1.getStartTime());
+        System.out.println("終了: " + event1.getEndTime());
         System.out.println("期間: " + event1.getEventDuration());
         System.out.println("現地時間: " + event1.getLocalTime());
         System.out.println("UTC時間: " + event1.getUtcTime());
