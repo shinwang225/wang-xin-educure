@@ -1,0 +1,119 @@
+【例外分析と処理方法】
+
+1. addStudent(String name)
+
+■ 起こりうる例外
+(1) 配列の範囲を超える
+    条件: count >= students.length
+    原因: これ以上学生を追加できない
+    例外: IllegalStateException
+    処理方法: throw new IllegalStateException("エラー：これ以上学生を追加できません。リストがいっぱいです。");
+
+(2) nameがnull
+    条件: name == null
+    原因: 名前が未登録
+    処理方法: 今回は許可するため例外は投げない。禁止する場合はthrow new IllegalArgumentException("エラー：名前がnullです。");
+
+■ throws 宣言
+public void addStudent(String name) throws IllegalStateException
+
+
+
+
+2. getStudent(int id)
+
+■ 起こりうる例外
+(1) IDが範囲外
+    条件: id < 0 || id >= students.length
+    原因: 存在しない学生IDを指定
+    例外: IllegalArgumentException
+    処理方法: throw new IllegalArgumentException("エラー：無効な学生IDです: " + id);
+
+(2) データが未登録 (null)
+    条件: students[id] == null
+    原因: 該当位置に名前が入っていない
+    例外: IllegalStateException
+    処理方法: throw new IllegalStateException("エラー：学生ID " + id + " にデータがありません。");
+    ※メインクラスでは、この例外をキャッチした後、エラーメッセージと学生ID 3: nullというフォーマットで出力する。
+
+■ throws 宣言
+public String getStudent(int id) throws IllegalArgumentException, IllegalStateException
+
+
+
+
+3. updateStudent(int id, String name)
+
+■ 起こりうる例外
+(1) IDが範囲外
+    条件: id < 0 || id >= students.length
+    原因: 存在しない学生IDを指定
+    例外: IllegalArgumentException
+    処理方法: throw new IllegalArgumentException("エラー：無効な学生IDです: " + id);
+
+(2) nameがnull
+    条件: name == null
+    原因: 名前が未登録
+    処理方法: 今回は許可。禁止する場合はthrow new IllegalArgumentException("エラー：名前がnullです。");
+
+■ throws 宣言
+public void updateStudent(int id, String name) throws IllegalArgumentException
+
+
+
+【例外処理】（Mainクラス）
+
+try {
+    sm.addStudent("フランク");
+} catch (IllegalStateException e) {
+    System.out.println(e.getMessage());
+}
+
+try {
+    System.out.println(sm.getStudent(3));
+} catch (IllegalArgumentException | IllegalStateException e) {
+    System.out.println(e.getMessage());
+}
+
+try {
+    sm.updateStudent(10, "田中");
+} catch (IllegalArgumentException e) {
+    System.out.println(e.getMessage());
+}
+
+
+
+【テストケース】
+
+1. 正常追加
+    入力: "アリス", "ボブ", "チャーリー", null, "イヴ"
+    期待結果: 学生ID 0〜4 に順に格納される
+
+2. 配列範囲以外の追加
+    操作: ６人目の学生を追加する、"フランク" を addStudent
+    期待結果: IllegalStateException
+               メッセージ「エラー：これ以上学生を追加できません。リストがいっぱいです。」
+
+3. 存在するID取得
+    操作: getStudent(2)
+    期待結果: "チャーリー" を出力
+
+4. データ未登録ID取得
+    操作: getStudent(3) （nullの位置）
+    期待結果: IllegalStateException
+               メッセージ「エラー：学生ID 3 にデータがありません。」
+
+5. 範囲外ID取得
+    操作: getStudent(10)
+    期待結果: IllegalArgumentException
+               メッセージ「エラー：無効な学生IDです: 10」
+ 
+6. 更新（正常）
+    操作: updateStudent(0, "フランク"), updateStudent(1, "ボビー")
+    期待結果: ID0とID1のデータが更新される
+              getStudentOrNull(1) => "ボビー"
+
+7. 更新（範囲外）
+    操作: updateStudent(10, "田中")
+    期待結果: IllegalArgumentException
+               メッセージ「エラー：無効な学生IDです: 10」
