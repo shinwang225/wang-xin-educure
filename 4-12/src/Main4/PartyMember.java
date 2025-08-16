@@ -27,7 +27,7 @@ public class PartyMember implements Cloneable {
         }
     }
 
-    public void showSkills(){
-        System.out.println(name + "のスキル: " + skills);
+    public void showSkills(String lable){
+        System.out.println(lable + "「" + name + "」のスキル: " + skills);
     }
 }
