@@ -41,15 +41,12 @@ public class RPGCharacterTest {
         assertEquals(540,  character.getMP(),   "MPが540になるはず");
 
         // レベル99からのレベルアップ
-        assertThrows(IllegalStateException.class, () -> character.levelUp(), 
-        "最大レベルで例外が発生するはず");
+        IllegalStateException exception = assertThrows(
+            IllegalStateException.class,() -> character.levelUp(), 
+                "最大レベルで例外が発生するはず");
 
-        try {
-            character.levelUp();
-            fail("最大レベルで例外が発生するはず");
-        } catch (IllegalStateException exception) {
-            assertEquals("最大レベルに達しています", exception.getMessage(),
+        // 例外メッセージの確認
+        assertEquals("最大レベルに達しています", exception.getMessage(),
             "例外メッセージが正しいはず");
-        }
     }
 }
