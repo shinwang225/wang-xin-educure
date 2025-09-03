@@ -31,7 +31,7 @@ public class Main2 {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            System.out.println("HTTP Response Code: " + response.statusCode());
+            System.out.println("status code: " + response.statusCode());
             System.out.println(response.body());
         } catch (Exception e) {
             e.printStackTrace();
